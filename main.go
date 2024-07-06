@@ -117,8 +117,6 @@ func (r Running) Calories() float64 {
 // Это переопределенный метод TrainingInfo() из Training.
 func (r Running) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	i := InfoMessage{}
-	i.SetCalories(r.Calories())
 	return r.Training.TrainingInfo()
 }
 
@@ -206,11 +204,6 @@ func (s Swimming) TrainingInfo() InfoMessage {
 	return inf
 }
 
-// Метод добавляющий информацию о затраченных калориях в структуру с информацией о тренировке
-func (i *InfoMessage) SetCalories(calories float64) {
-	i.Calories = calories
-}
-
 // ReadData возвращает информацию о проведенной тренировке.
 func ReadData(training CaloriesCalculator) string {
 	// получите количество затраченных калорий
@@ -218,8 +211,7 @@ func ReadData(training CaloriesCalculator) string {
 	// получите информацию о тренировке
 	info := training.TrainingInfo()
 	// добавьте полученные калории в структуру с информацией о тренировке
-	x := InfoMessage{}
-	x.SetCalories(calories)
+	info.Calories = calories
 	return fmt.Sprint(info)
 }
 
